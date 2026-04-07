@@ -44,13 +44,24 @@ async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> 
     ...options,
     headers: buildHeaders(options.headers as Record<string, string>),
   });
+
   const text = await response.text();
-  const data = text ? JSON.parse(text) : null;
+
+  let data;
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = null;
+  }
+
   if (!response.ok) {
     throw data || { message: 'API request failed' };
   }
+
   return data;
 }
+
+// ================= AUTH =================
 
 export async function login(email: string, password: string) {
   const data = await apiFetch<{ token: string; user: any }>('/api/auth/login', {
@@ -72,6 +83,22 @@ export async function register(email: string, password: string, name: string) {
   return data;
 }
 
+export async function googleLogin(idToken: string) {
+  const data = await apiFetch<{ token: string; user: any }>('/api/auth/google', {
+    method: 'POST',
+    body: JSON.stringify({ idToken }),
+  });
+  setAuthToken(data.token);
+  window.localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+  return data;
+}
+
+// ================= PROFILE =================
+
+export async function fetchProfile() {
+  return apiFetch<{ user: any }>('/api/auth/profile');
+}
+
 export async function updateProfile(name: string, email: string) {
   const data = await apiFetch<{ user: any }>('/api/auth/profile', {
     method: 'PUT',
@@ -81,9 +108,7 @@ export async function updateProfile(name: string, email: string) {
   return data;
 }
 
-export async function fetchProfile() {
-  return apiFetch<{ user: any }>('/api/auth/profile');
-}
+// ================= HEARING =================
 
 export async function submitHearingResult(result: HearingResult) {
   return apiFetch<{ hearingResult: any }>('/api/hearing-results', {
@@ -95,6 +120,8 @@ export async function submitHearingResult(result: HearingResult) {
 export async function fetchHearingResults() {
   return apiFetch<{ results: HearingResult[] }>('/api/hearing-results');
 }
+
+// ================= SPEECH =================
 
 export async function submitSpeechResult(result: SpeechResult) {
   return apiFetch<{ speechResult: any }>('/api/speech-results', {
@@ -113,6 +140,8 @@ export async function submitSpeechResult(result: SpeechResult) {
 export async function fetchSpeechResults() {
   return apiFetch<{ results: SpeechResult[] }>('/api/speech-results');
 }
+
+// ================= 3D SOUND =================
 
 export async function submit3DSoundResults(result: {
   results: any[];
@@ -133,51 +162,8 @@ export async function fetch3DSoundResults() {
   return apiFetch<{ results: any[] }>('/api/3d-sound-results');
 }
 
+// ================= HISTORY =================
+
 export async function fetchHistory() {
   return apiFetch<{ history: any[] }>('/api/history');
-}
-
-export async function googleLogin(idToken: string) {
-  const data = await apiFetch<{ token: string; user: any }>('/api/auth/google', {
-    method: 'POST',
-    body: JSON.stringify({ idToken }),
-  });
-  setAuthToken(data.token);
-  window.localStorage.setItem(USER_KEY, JSON.stringify(data.user));
-  return data;
-}
-
-export async function forgotPassword(email: string) {
-  return apiFetch<{ message: string }>('/api/auth/forgot-password', {
-    method: 'POST',
-    body: JSON.stringify({ email }),
-  });
-}
-
-export async function verifyOTP(email: string, otp: string, purpose: string = 'forgot-password') {
-  return apiFetch<{ message: string }>('/api/auth/verify-otp', {
-    method: 'POST',
-    body: JSON.stringify({ email, otp, purpose }),
-  });
-}
-
-export async function resetPassword(email: string, otp: string, newPassword: string) {
-  return apiFetch<{ message: string }>('/api/auth/reset-password', {
-    method: 'POST',
-    body: JSON.stringify({ email, otp, newPassword }),
-  });
-}
-
-export async function requestOTP() {
-  return apiFetch<{ message: string }>('/api/auth/request-otp', {
-    method: 'POST',
-    body: JSON.stringify({}),
-  });
-}
-
-export async function changePassword(currentPassword: string, newPassword: string, otp: string) {
-  return apiFetch<{ message: string }>('/api/auth/change-password', {
-    method: 'POST',
-    body: JSON.stringify({ currentPassword, newPassword, otp }),
-  });
 }
