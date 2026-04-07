@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Auralis - Digital Audiometry
 
 This repository is now organized into a frontend/backend workspace structure.
@@ -142,3 +143,6 @@ Copy to backend/.env and set:
 MONGODB_URI
 JWT_SECRET
 PORT
+=======
+# Auralis---Digital-Audiometry
+>>>>>>> bb25e74605c41eb5b143742aa877a7f71968286b
