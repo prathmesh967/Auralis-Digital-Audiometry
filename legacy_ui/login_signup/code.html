@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sonic Architect | Authentication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#00223c",
+                        "surface-tint": "#96f8ff",
+                        "surface-container-highest": "#20262f",
+                        "surface-container-low": "#0f141a",
+                        "error-dim": "#d7383b",
+                        "on-tertiary-fixed": "#00192f",
+                        "inverse-surface": "#f8f9ff",
+                        "surface-bright": "#262c36",
+                        "on-secondary-container": "#e4d4ff",
+                        "surface-dim": "#0a0e14",
+                        "secondary-dim": "#8a4bff",
+                        "secondary": "#af88ff",
+                        "secondary-fixed-dim": "#d0b8ff",
+                        "inverse-on-surface": "#51555d",
+                        "error": "#ff716c",
+                        "primary-dim": "#00e2ed",
+                        "background": "#0a0e14",
+                        "surface": "#0a0e14",
+                        "on-background": "#f1f3fc",
+                        "on-error": "#490006",
+                        "outline-variant": "#44484f",
+                        "on-secondary": "#2a0065",
+                        "primary-fixed-dim": "#00e2ed",
+                        "secondary-container": "#6205d6",
+                        "primary": "#96f8ff",
+                        "tertiary-fixed": "#6ab6ff",
+                        "tertiary": "#5bb1ff",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#f1f3fc",
+                        "secondary-fixed": "#dcc9ff",
+                        "on-primary-container": "#00565a",
+                        "inverse-primary": "#006a6f",
+                        "on-tertiary": "#002e4f",
+                        "error-container": "#9f0519",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed-variant": "#006065",
+                        "on-primary-fixed": "#004145",
+                        "tertiary-dim": "#44a3f5",
+                        "on-tertiary-fixed-variant": "#003c64",
+                        "primary-container": "#00f1fd",
+                        "on-secondary-fixed": "#430098",
+                        "surface-variant": "#20262f",
+                        "tertiary-fixed-dim": "#4ba9fa",
+                        "surface-container": "#151a21",
+                        "on-surface-variant": "#a8abb3",
+                        "on-primary": "#005f64",
+                        "tertiary-fixed": "#6ab6ff",
+                        "primary-fixed": "#00f1fd",
+                        "surface-container-high": "#1b2028",
+                        "outline": "#72757d",
+                        "on-secondary-fixed-variant": "#6510d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .waveform-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(150, 248, 255, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .glass-panel {
+            background: rgba(32, 38, 47, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
+        }
+        .human-gradient {
+            background: linear-gradient(135deg, #8a4bff 0%, #ff716c 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Background Decoration -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="waveform-bg absolute inset-0 opacity-40"></div>
+<!-- Blurred Accent Orbs -->
+<div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[120px]"></div>
+<!-- Abstract Wave Motif -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl opacity-20">
+<svg class="w-full" viewbox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,200 Q150,50 300,200 T600,200 T900,200" fill="none" stroke="url(#wave-grad)" stroke-width="2"></path>
+<path d="M0,220 Q150,120 300,220 T600,220 T900,220" fill="none" opacity="0.5" stroke="url(#wave-grad)" stroke-width="1"></path>
+<defs>
+<lineargradient id="wave-grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#96f8ff;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#8a4bff;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-grow flex items-center justify-center p-6 md:p-12">
+<div class="w-full max-w-md">
+<!-- Identity Header -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-surface-container-high mb-6 shadow-2xl">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+</div>
+<h1 class="font-headline font-black tracking-tighter text-3xl uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">
+                    SONIC ARCHITECT
+                </h1>
+<p class="font-label text-xs tracking-[0.2em] uppercase text-on-surface-variant mt-2">Precision Audiometry Systems</p>
+</div>
+<!-- Login Card -->
+<div class="glass-panel border border-white/5 rounded-[32px] p-8 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)]">
+<div class="mb-8">
+<h2 class="font-headline text-2xl font-bold text-on-surface">Welcome Back</h2>
+<p class="text-on-surface-variant text-sm mt-1">Access your clinical diagnostic dashboard</p>
+</div>
+<form class="space-y-6" onsubmit="return false;">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-primary/70 ml-1">Email Address</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-1 focus:ring-primary/50 transition-all duration-300" placeholder="audiologist@sonic.tech" type="email"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors">alternate_email</span>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-end px-1">
+<label class="font-label text-[10px] uppercase tracking-widest text-primary/70">Security Key</label>
+<a class="text-[10px] uppercase tracking-widest text-tertiary hover:text-primary transition-colors" href="#">Forgot?</a>
+</div>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-1 focus:ring-primary/50 transition-all duration-300" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors">lock_person</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 rounded-xl signature-gradient text-on-background font-bold uppercase tracking-widest text-xs shadow-[0_8px_24px_rgba(0,242,254,0.3)] active:scale-[0.98] transition-transform duration-200 mt-2">
+                        Sign In
+                    </button>
+</form>
+<!-- Divider -->
+<div class="relative my-8">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/5"></div></div>
+<div class="relative flex justify-center text-[10px] uppercase tracking-widest font-label">
+<span class="bg-surface-container-highest/20 px-4 text-on-surface-variant">Or authenticate via</span>
+</div>
+</div>
+<!-- Social Login -->
+<button class="w-full flex items-center justify-center gap-3 py-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300 active:scale-[0.98]">
+<img alt="Google" class="w-5 h-5 opacity-80" data-alt="clean minimal google logo icon on transparent background with high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW_9vxw6jkDA-tAai50BAuSa5LycYn6-Kk-UqPLbl-0BGD4sLM4oD7cmbOPu3QTnXP9EBxjvOI1-KqehnznV3nI9qSOiQgBhDRIEEP2_pLE-M__PoKywcvbiShG7lL1KFtF2TLU6bZpJZFTXNYYdbvxbWIZd59MIbTva0IB7ZNfnENKf3PQwVLPX0ZVnXw35BGunmsRRvhLUXX6aiKuXiq1sEoijLc3PbHzxw095g7dbvDkeAAh5QWkBQCOAe7MsHQ1qeA23B1MlUO"/>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface">Continue with Google</span>
+</button>
+</div>
+<!-- Footer Links -->
+<div class="mt-10 text-center space-y-4">
+<p class="text-sm text-on-surface-variant">
+                    Don't have an account? 
+                    <a class="text-secondary font-bold hover:underline ml-1" href="#">Sign Up</a>
+</p>
+<div class="flex items-center justify-center gap-6 pt-4">
+<a class="text-[10px] uppercase tracking-widest text-on-surface-variant/40 hover:text-on-surface-variant transition-colors" href="#">Privacy Protocol</a>
+<a class="text-[10px] uppercase tracking-widest text-on-surface-variant/40 hover:text-on-surface-variant transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Polish: Content Scanline Effect -->
+<div class="fixed inset-0 pointer-events-none z-50 opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+</body></html>

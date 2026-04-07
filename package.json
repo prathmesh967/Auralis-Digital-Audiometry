@@ -1,0 +1,11 @@
+{
+  "name": "sonic-architect-monorepo",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "dev": "npm --workspace frontend run dev",
+    "build": "npm --workspace frontend run build",
+    "preview": "npm --workspace frontend run preview",
+    "start": "npm --workspace backend start"
+  }
+}

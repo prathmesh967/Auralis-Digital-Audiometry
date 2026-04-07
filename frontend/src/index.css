@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, rgba(150, 248, 255, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(175, 136, 255, 0.12), transparent 25%),
+    #0a0e14;
+  color: #f1f3fc;
+  font-family: 'Inter', sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.glass-panel {
+  background: rgba(16, 22, 33, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}

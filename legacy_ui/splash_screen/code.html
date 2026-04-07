@@ -1,0 +1,178 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#00223c",
+            "surface-tint": "#96f8ff",
+            "surface-container-highest": "#20262f",
+            "surface-container-low": "#0f141a",
+            "error-dim": "#d7383b",
+            "on-tertiary-fixed": "#00192f",
+            "inverse-surface": "#f8f9ff",
+            "surface-bright": "#262c36",
+            "on-secondary-container": "#e4d4ff",
+            "surface-dim": "#0a0e14",
+            "secondary-dim": "#8a4bff",
+            "secondary": "#af88ff",
+            "secondary-fixed-dim": "#d0b8ff",
+            "inverse-on-surface": "#51555d",
+            "error": "#ff716c",
+            "primary-dim": "#00e2ed",
+            "background": "#0a0e14",
+            "surface": "#0a0e14",
+            "on-background": "#f1f3fc",
+            "on-error": "#490006",
+            "outline-variant": "#44484f",
+            "on-secondary": "#2a0065",
+            "primary-fixed-dim": "#00e2ed",
+            "secondary-container": "#6205d6",
+            "primary": "#96f8ff",
+            "tertiary-fixed": "#6ab6ff",
+            "tertiary": "#5bb1ff",
+            "on-error-container": "#ffa8a3",
+            "on-surface": "#f1f3fc",
+            "secondary-fixed": "#dcc9ff",
+            "on-primary-container": "#00565a",
+            "inverse-primary": "#006a6f",
+            "on-tertiary": "#002e4f",
+            "error-container": "#9f0519",
+            "surface-container-lowest": "#000000",
+            "on-primary-fixed-variant": "#006065",
+            "on-primary-fixed": "#004145",
+            "tertiary-dim": "#44a3f5",
+            "on-tertiary-fixed-variant": "#003c64",
+            "primary-container": "#00f1fd",
+            "on-secondary-fixed": "#430098",
+            "surface-variant": "#20262f",
+            "tertiary-fixed-dim": "#4ba9fa",
+            "surface-container": "#151a21",
+            "on-surface-variant": "#a8abb3",
+            "on-primary": "#005f64",
+            "tertiary-fixed": "#6ab6ff",
+            "primary-fixed": "#00f1fd",
+            "surface-container-high": "#1b2028",
+            "outline": "#72757d",
+            "on-secondary-fixed-variant": "#6510d9"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Space Grotesk"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>body {
+    background-color: #0a0e14;
+    overflow: hidden
+    }
+.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAF4-DRrbgX1M23NhPpryJv4CVL3rzfQlwRvtnSB0Mee62NcBrsl4jsPe_ri9AQl6Nh7NcCp2kmX5z5deHFrGSPS0tjygKtO8JL6cf6TD58RwlROS9-Ba8i_vhSKA76u0Q8_pPNJdoRHS0MoRsmF6CM0m4fu_iMh5Q-8OFS8F-iKa2pVOyN4wzuAct6J7s3DLNDdB58KWKAe5hCuMdFMJPbSSPrcwwjVAYeirKMzlfUjMKImTFgBxlCIHggjZKUTagSa65Wkw6H51xf);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.glow-orb {
+    filter: blur(100px);
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0.3
+    }
+.loading-bar-inner {
+    width: 40%;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.5)
+    }
+.waveform-bar {
+    transition: height 0.3s ease
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0 bg-background overflow-hidden">
+<div class="grain-overlay absolute inset-0"></div>
+<!-- Moving Glow Orbs -->
+<div class="glow-orb bg-primary w-[500px] h-[500px] -top-48 -left-24 animate-pulse"></div>
+<div class="glow-orb bg-secondary w-[400px] h-[400px] bottom-10 -right-20"></div>
+<div class="glow-orb bg-tertiary w-[300px] h-[300px] top-1/2 left-1/3 opacity-20"></div>
+</div>
+<!-- Main Content Layer -->
+<main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-8">
+<!-- Logo Container: 3D-looking Sound Wave Logo -->
+<div class="relative mb-12 group">
+<!-- Glow behind logo -->
+<div class="absolute inset-0 bg-primary/20 blur-3xl scale-150 rounded-full"></div>
+<div class="relative w-48 h-48 flex items-center justify-center bg-surface-container-low/40 backdrop-blur-xl rounded-[48px] border border-white/5 shadow-2xl">
+<div class="flex items-end justify-center gap-1.5 h-24">
+<!-- Stylized 3D Wave Bars -->
+<div class="w-2.5 h-12 bg-gradient-to-t from-primary to-tertiary rounded-full shadow-[0_0_10px_rgba(150,248,255,0.4)]"></div>
+<div class="w-2.5 h-20 bg-gradient-to-t from-primary to-secondary rounded-full shadow-[0_0_10px_rgba(150,248,255,0.4)]"></div>
+<div class="w-2.5 h-14 bg-gradient-to-t from-primary to-tertiary rounded-full shadow-[0_0_10px_rgba(150,248,255,0.4)]"></div>
+<div class="w-2.5 h-24 bg-gradient-to-t from-primary to-secondary rounded-full shadow-[0_0_15px_rgba(150,248,255,0.6)]"></div>
+<div class="w-2.5 h-16 bg-gradient-to-t from-primary to-tertiary rounded-full shadow-[0_0_10px_rgba(150,248,255,0.4)]"></div>
+<div class="w-2.5 h-20 bg-gradient-to-t from-primary to-secondary rounded-full shadow-[0_0_10px_rgba(150,248,255,0.4)]"></div>
+<div class="w-2.5 h-10 bg-gradient-to-t from-primary to-tertiary rounded-full shadow-[0_0_10px_rgba(150,248,255,0.4)]"></div>
+</div>
+</div>
+</div>
+<!-- App Title -->
+<div class="text-center">
+<h1 class="font-headline text-4xl md:text-5xl font-black tracking-tight mb-2">
+<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary-fixed to-secondary drop-shadow-[0_0_12px_rgba(0,242,254,0.3)]">
+          Digital Audiometry
+        </span>
+</h1>
+<p class="font-label text-xs tracking-[0.4em] text-on-surface-variant uppercase font-medium opacity-80">
+        The Sonic Architect
+      </p>
+</div>
+<!-- Footer Area: Loading -->
+<div class="absolute bottom-24 w-full max-w-xs flex flex-col items-center gap-6">
+<div class="flex flex-col items-center gap-2">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary font-bold">
+          Loading...
+        </span>
+<!-- Glassmorphic Progress Bar -->
+<div class="w-64 h-1.5 bg-surface-container-highest/40 backdrop-blur-md rounded-full overflow-hidden border border-white/5">
+<div class="loading-bar-inner h-full bg-gradient-to-r from-primary to-tertiary rounded-full"></div>
+</div>
+</div>
+<!-- Version / Rights Metadata -->
+<div class="pt-8 opacity-40">
+<p class="font-label text-[9px] uppercase tracking-tighter text-on-surface-variant">
+          Precision Diagnostic System v4.0.2
+        </p>
+</div>
+</div>
+<!-- Decorative Image Frame (Minimalist medical interface feel) -->
+<div class="fixed top-12 left-12 hidden lg:block opacity-20 group">
+<img alt="Microscopic view of sound receptors in the ear" class="w-32 h-32 object-cover rounded-2xl grayscale" data-alt="abstract macro photography of high-tech medical sensors and acoustic glass surfaces with blue ambient light and reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwfMeUZnGJ4APE12RJ-cBEiz_Wx7c46YSxcUB3RA_mU4RhPoojbQjRozqexBOrPc4N3MN1dLNNURSX1_mpSZKjgut7PnEWPaswR8nulPvuzblmzQ3QUM85pHZeQvsZkT0Y3myTFSQqoI-OFnWFzyXE9iiJZoYI58C_FZoMz8VP5bifHcFCN6J7QyQFEnAQ1QCBzve7ZC1yrGDnfqZHgsoRXc3-ZFPSu9Q-EI0yGX__s5lfKEDJOxQzNN2FoPB9nLOtHHq689kDgPrx"/>
+</div>
+<div class="fixed top-12 right-12 hidden lg:block opacity-20">
+<div class="w-32 text-right">
+<p class="font-headline text-xl font-bold text-primary">00101</p>
+<p class="font-label text-[8px] uppercase tracking-widest leading-tight">Neural Sync<br/>Protocol Active</p>
+</div>
+</div>
+</main>
+<!-- Navigation Suppression: This is a Splash Screen, no shell rendered -->
+</body></html>

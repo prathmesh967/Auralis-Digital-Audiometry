@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sonic Architect - Home Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#00223c",
+                        "surface-tint": "#96f8ff",
+                        "surface-container-highest": "#20262f",
+                        "surface-container-low": "#0f141a",
+                        "error-dim": "#d7383b",
+                        "on-tertiary-fixed": "#00192f",
+                        "inverse-surface": "#f8f9ff",
+                        "surface-bright": "#262c36",
+                        "on-secondary-container": "#e4d4ff",
+                        "surface-dim": "#0a0e14",
+                        "secondary-dim": "#8a4bff",
+                        "secondary": "#af88ff",
+                        "secondary-fixed-dim": "#d0b8ff",
+                        "inverse-on-surface": "#51555d",
+                        "error": "#ff716c",
+                        "primary-dim": "#00e2ed",
+                        "background": "#0a0e14",
+                        "surface": "#0a0e14",
+                        "on-background": "#f1f3fc",
+                        "on-error": "#490006",
+                        "outline-variant": "#44484f",
+                        "on-secondary": "#2a0065",
+                        "primary-fixed-dim": "#00e2ed",
+                        "secondary-container": "#6205d6",
+                        "primary": "#96f8ff",
+                        "tertiary-fixed": "#6ab6ff",
+                        "tertiary": "#5bb1ff",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#f1f3fc",
+                        "secondary-fixed": "#dcc9ff",
+                        "on-primary-container": "#00565a",
+                        "inverse-primary": "#006a6f",
+                        "on-tertiary": "#002e4f",
+                        "error-container": "#9f0519",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed-variant": "#006065",
+                        "on-primary-fixed": "#004145",
+                        "tertiary-dim": "#44a3f5",
+                        "on-tertiary-fixed-variant": "#003c64",
+                        "primary-container": "#00f1fd",
+                        "on-secondary-fixed": "#430098",
+                        "surface-variant": "#20262f",
+                        "tertiary-fixed-dim": "#4ba9fa",
+                        "surface-container": "#151a21",
+                        "on-surface-variant": "#a8abb3",
+                        "on-primary": "#005f64",
+                        "tertiary-container": "#44a3f5",
+                        "primary-fixed": "#00f1fd",
+                        "surface-container-high": "#1b2028",
+                        "outline": "#72757d",
+                        "on-secondary-fixed-variant": "#6510d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(38, 44, 54, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0a0e14;
+            color: #f1f3fc;
+            font-family: 'Inter', sans-serif;
+        }
+        .waveform-bar {
+            width: 3px;
+            border-radius: 99px;
+            background: #96f8ff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20">
+<img alt="Professional Audiologist Portrait" class="w-full h-full object-cover" data-alt="Professional audiologist in a modern medical setting, soft clinic lighting, wearing white medical coat, looking friendly and confident" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-W4Aeuv7y5YhF8oErrppLgIrxOrtPjky8_lOZ8JG0LrNggEk6xJjHZT6jg_ok_L0OIsNIFlM3bKkufV72HKgVFwdOjthQbScOHT4q2zmiKR69m8UxZzZaDale2sMKSvM1zL_1xiGoRllnXWm8Q7vTWq2dmcj2zlCEzaUUy_H-3ZGE-Qt0_hzxYUAYeLUbhvH768t7uH6ZgfHfTDoAN1PsUTA9HBibHNB3vt6XDTjp3_NdFEWYtaNclcFhDoco0ZKZQLNlinad1MEZ"/>
+</div>
+<h1 class="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-['Space_Grotesk'] uppercase">SONIC ARCHITECT</h1>
+</div>
+<button class="text-cyan-400 hover:opacity-80 transition-opacity scale-95 active:scale-90 transition-transform duration-300">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</button>
+</header>
+<main class="pt-24 px-6 space-y-8">
+<!-- Hero Section: Hearing Health Overview -->
+<section class="relative">
+<div class="glass-panel p-8 rounded-[32px] border border-white/5 relative overflow-hidden">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+<div class="relative z-10 flex flex-col items-center">
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Overall Sonic Index</span>
+<!-- Circular Gauge -->
+<div class="relative w-48 h-48 flex items-center justify-center mb-6">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary drop-shadow-[0_0_12px_rgba(150,248,255,0.4)]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="82.93" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline text-6xl font-bold text-on-surface">85</span>
+<span class="font-label text-xs uppercase tracking-[0.2em] text-primary">Excellent</span>
+</div>
+</div>
+<div class="text-center">
+<h2 class="font-headline text-2xl font-bold mb-1">Hearing Health Overview</h2>
+<p class="font-body text-sm text-on-surface-variant max-w-[200px]">Your hearing is in the optimal range. Keep up the protection.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Ambient Noise Level Widget -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-[24px] flex flex-col justify-between h-40">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label text-[10px] uppercase tracking-widest text-slate-500">Live Environment</span>
+<h3 class="font-headline text-lg font-bold text-on-surface">Ambient Noise</h3>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="graphic_eq">graphic_eq</span>
+</div>
+<div class="flex items-end gap-1 h-12">
+<div class="waveform-bar h-4 opacity-40"></div>
+<div class="waveform-bar h-8 opacity-60"></div>
+<div class="waveform-bar h-6 opacity-40"></div>
+<div class="waveform-bar h-10 bg-primary shadow-[0_0_8px_rgba(150,248,255,0.6)]"></div>
+<div class="waveform-bar h-5 opacity-50"></div>
+<div class="waveform-bar h-9 opacity-80"></div>
+<div class="waveform-bar h-4 opacity-40"></div>
+<div class="waveform-bar h-7 bg-primary"></div>
+<div class="waveform-bar h-12 bg-primary"></div>
+<div class="waveform-bar h-6 opacity-40"></div>
+<div class="waveform-bar h-8 opacity-60"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="font-headline text-2xl font-bold text-primary">42 <span class="text-xs font-normal text-slate-500">dB</span></span>
+<span class="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full uppercase tracking-tighter">Safe Zone</span>
+</div>
+</div>
+<!-- Previous Test Results -->
+<div class="bg-surface-container-low p-6 rounded-[24px] flex flex-col h-40">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label text-[10px] uppercase tracking-widest text-slate-500">Threshold Analytics</span>
+<h3 class="font-headline text-lg font-bold text-on-surface">Stability History</h3>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="analytics">analytics</span>
+</div>
+<div class="flex-1 flex items-end gap-2 px-2">
+<div class="flex-1 h-16 bg-surface-container-highest/50 rounded-lg relative overflow-hidden">
+<svg class="absolute bottom-0 w-full h-full" preserveaspectratio="none">
+<path class="opacity-80" d="M0 40 Q 20 10, 40 30 T 80 20 T 120 40 T 160 10" fill="none" stroke="#af88ff" stroke-width="2"></path>
+<path class="opacity-20" d="M0 40 Q 20 10, 40 30 T 80 20 T 120 40 T 160 10 L 160 60 L 0 60 Z" fill="url(#grad1)"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#af88ff;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#af88ff;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] text-slate-500 font-bold">JAN</span>
+<span class="text-[10px] text-slate-500 font-bold">MAR</span>
+<span class="text-[10px] text-slate-500 font-bold">MAY</span>
+</div>
+</div>
+</section>
+<!-- Quick Start Test Card -->
+<section>
+<button class="w-full group relative overflow-hidden p-[1px] rounded-[24px] bg-gradient-to-r from-cyan-400 to-blue-600 active:scale-[0.98] transition-transform">
+<div class="bg-slate-950 p-8 rounded-[23px] flex items-center justify-between relative z-10 overflow-hidden">
+<div class="absolute right-0 top-0 w-32 h-full bg-primary/5 -skew-x-12 translate-x-8"></div>
+<div class="text-left relative z-20">
+<h3 class="font-headline text-2xl font-bold text-on-surface">Quick Start Test</h3>
+<p class="text-on-surface-variant text-sm mt-1">Full clinical audiometry baseline</p>
+</div>
+<div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,242,254,0.4)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-slate-950 font-bold" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</button>
+</section>
+<!-- Secondary Insights (Asymmetric Layout) -->
+<section class="grid grid-cols-2 gap-4">
+<div class="col-span-1 glass-panel p-6 rounded-[24px] border border-white/5 space-y-4">
+<div class="w-10 h-10 bg-tertiary/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold">AI Insights</h4>
+<p class="text-[11px] text-slate-500 leading-tight mt-1">Noise exposure high in late evenings.</p>
+</div>
+</div>
+<div class="col-span-1 bg-surface-container p-6 rounded-[24px] space-y-4">
+<div class="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="history">history</span>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold">Recent Check</h4>
+<p class="text-[11px] text-slate-500 leading-tight mt-1">2 days ago • Passed</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-8 bg-slate-950/60 backdrop-blur-2xl rounded-t-[32px] border-t border-white/10 shadow-[0_-10px_40px_rgba(0,242,254,0.05)]">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,254,0.6)] transform -translate-y-1 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home_max" style="font-variation-settings: 'FILL' 1;">home_max</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-widest">Home</span>
+</a>
+<!-- Test -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-widest">Test</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-widest">History</span>
+</a>
+<!-- Insights -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="psychology">psychology</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-widest">Insights</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="tune">tune</span>
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-widest">Settings</span>
+</a>
+</nav>
+</body></html>
