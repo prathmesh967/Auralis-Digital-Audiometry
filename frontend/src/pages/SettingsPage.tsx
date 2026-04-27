@@ -67,7 +67,7 @@ export default function SettingsPage() {
 
     setPasswordChangeLoading(true);
     try {
-      await changePassword(currentPassword, newPassword, otp);
+      await changePassword(otp, newPassword);
       setDataMessage('Password changed successfully!');
       setCurrentPassword('');
       setNewPassword('');

@@ -39,7 +39,7 @@ export default function ForgotPasswordModal({
     setLoading(true);
     setError('');
     try {
-      await verifyOTP(email, otp, 'forgot-password');
+      await verifyOTP(email, otp);
       setMessage('OTP verified successfully');
       setStep('password');
     } catch (err: any) {

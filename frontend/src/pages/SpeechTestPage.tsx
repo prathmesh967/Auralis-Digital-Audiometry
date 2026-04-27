@@ -36,6 +36,31 @@ export default function SpeechTestPage() {
   const recognitionRef = useRef<any>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
 
+  // Levenshtein distance for string similarity
+  const calculateLevenshteinDistance = (str1: string, str2: string): number => {
+    const matrix = [];
+    for (let i = 0; i <= str2.length; i++) {
+      matrix[i] = [i];
+    }
+    for (let j = 0; j <= str1.length; j++) {
+      matrix[0][j] = j;
+    }
+    for (let i = 1; i <= str2.length; i++) {
+      for (let j = 1; j <= str1.length; j++) {
+        if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+          matrix[i][j] = matrix[i - 1][j - 1];
+        } else {
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j - 1] + 1,
+            matrix[i][j - 1] + 1,
+            matrix[i - 1][j] + 1
+          );
+        }
+      }
+    }
+    return matrix[str2.length][str1.length];
+  };
+
   useEffect(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     setRecognitionSupported(Boolean(SpeechRecognition));
@@ -129,13 +154,33 @@ export default function SpeechTestPage() {
 
     recognition.onresult = (event: any) => {
       const resultText = event.results?.[0]?.[0]?.transcript || '';
-const expected = speechPrompts[currentWordIndex].toLowerCase().trim();
+      const expected = speechPrompts[currentWordIndex].toLowerCase().trim();
       const normalized = resultText.toLowerCase().trim();
-      const correct = normalized === expected;
+
+      // More flexible matching - remove punctuation and extra spaces
+      const cleanExpected = expected.replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+      const cleanNormalized = normalized.replace(/[.,!?]/g, '').replace(/\s+/g, ' ');
+
+      // Check if the spoken text contains the expected phrase or is very similar
+      const expectedWords = cleanExpected.split(' ');
+      const spokenWords = cleanNormalized.split(' ');
+
+      // Calculate similarity - count matching words
+      const matchingWords = expectedWords.filter((word: string) =>
+        spokenWords.some((spokenWord: string) =>
+          spokenWord.includes(word) || word.includes(spokenWord) ||
+          calculateLevenshteinDistance(word, spokenWord) <= 2
+        )
+      );
+
+      const similarity = matchingWords.length / expectedWords.length;
+      const correct = similarity >= 0.8; // 80% similarity threshold
 
       setTranscript(resultText);
       setMatchStatus(correct ? 'Matched' : 'Try again');
-      setStatusMessage(correct ? 'Great! You repeated the sentence correctly.' : 'The spoken sentence did not match exactly. Try again.');
+      setStatusMessage(correct ?
+        'Great! You repeated the sentence correctly.' :
+        `The spoken sentence didn't match closely enough (${Math.round(similarity * 100)}% similar). Try again.`);
 
       if (correct && !currentWordCorrect) {
         setWordsCorrect((current) => current + 1);

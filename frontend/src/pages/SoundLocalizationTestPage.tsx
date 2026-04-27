@@ -35,9 +35,16 @@ export default function SoundLocalizationTestPage() {
     });
 
     return () => {
-      engine.stop();
+      engine.stopTone();
     };
   }, []);
+
+  // Stop tone when test completes
+  useEffect(() => {
+    if (testCompleted && audioEngine) {
+      audioEngine.stopTone();
+    }
+  }, [testCompleted, audioEngine]);
 
   const getDirectionLabel = (position: Sound3DPosition): string => {
     if (position.z > 0.5) return 'front';
@@ -50,18 +57,33 @@ export default function SoundLocalizationTestPage() {
   const playSound = async () => {
     if (!audioEngine) return;
 
+    // Ensure audio context is running (required by browsers)
+    const audioContext = audioEngine.getAudioContext();
+    if (audioContext?.state === 'suspended') {
+      await audioContext.resume();
+    }
+
     const position = audioEngine.getRandomPosition();
     setCurrentPosition(position);
-    setIsPlaying(true);
     setCurrentDirection(getDirectionLabel(position));
     setTestStartTime(Date.now());
 
-    audioEngine.playToneFromPosition(position, 1);
-    // Keep isPlaying true until user responds - don't disable buttons after 1 second
+    audioEngine.startContinuousTone(position);
+    setIsPlaying(true);
+  };
+
+  const pauseSound = () => {
+    if (audioEngine) {
+      audioEngine.stopTone();
+      setIsPlaying(false);
+    }
   };
 
   const handleDirectionGuess = async (guessedDirection: string) => {
     if (!currentPosition || !testStartTime) return;
+
+    // Stop the tone
+    pauseSound();
 
     const responseTimeMs = Date.now() - testStartTime;
     const actualDirection = getDirectionLabel(currentPosition);
@@ -79,13 +101,10 @@ export default function SoundLocalizationTestPage() {
     setResponseTime(responseTimeMs);
     setCurrentPosition(null);
     setCurrentDirection(null);
-    setIsPlaying(false); // Disable buttons after response
 
     if (currentRound + 1 < TOTAL_ROUNDS) {
       setCurrentRound(currentRound + 1);
-      setTimeout(() => {
-        playSound();
-      }, 1500);
+      // Don't auto-play next sound - wait for user to click play
     } else {
       const finalScore = calculateTestScore([...results, newResult]);
       setScore(finalScore);
@@ -108,15 +127,21 @@ export default function SoundLocalizationTestPage() {
     }
   };
 
-  const handleStartTest = () => {
+  const handleStartTest = async () => {
+    // Ensure audio context is running before starting the test
+    if (audioEngine) {
+      const audioContext = audioEngine.getAudioContext();
+      if (audioContext?.state === 'suspended') {
+        await audioContext.resume();
+      }
+    }
+
     setTestStarted(true);
     setCurrentRound(0);
     setResults([]);
     setScore(null);
     setTestCompleted(false);
-    setTimeout(() => {
-      playSound();
-    }, 1000);
+    // Don't auto-play the first sound - let user control it
   };
 
   const handleBackToDashboard = () => {
@@ -165,7 +190,9 @@ export default function SoundLocalizationTestPage() {
                   <ul className="text-sm text-slate-400 space-y-2 mt-2">
                     <li>• You'll hear {TOTAL_ROUNDS} sound sequences</li>
                     <li>• Each sound comes from FRONT, BACK, LEFT, or RIGHT</li>
-                    <li>• Click the button that matches the sound direction</li>
+                    <li>• Click "Play Sound" to start each tone</li>
+                    <li>• Use "Pause Sound" to stop the tone anytime</li>
+                    <li>• Click the direction button that matches where you heard the sound</li>
                     <li>• We measure your accuracy and reaction time</li>
                   </ul>
                 </div>
@@ -335,56 +362,56 @@ export default function SoundLocalizationTestPage() {
             )}
           </div>
 
-          {!isPlaying ? (
-            <>
-              {currentRound === 0 ? (
-                <button
-                  onClick={playSound}
-                  className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4 font-semibold text-slate-950 transition hover:scale-[0.99]"
-                >
-                  🔊 Play Sound
-                </button>
-              ) : currentRound < TOTAL_ROUNDS ? (
-                <button
-                  onClick={playSound}
-                  className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4 font-semibold text-slate-950 transition hover:scale-[0.99]"
-                >
-                  🔊 Next Sound
-                </button>
-              ) : null}
-            </>
-          ) : (
-            <div className="grid gap-3 grid-cols-2">
+          {/* Play/Pause Controls */}
+          <div className="flex gap-3 mb-6">
+            {!isPlaying ? (
               <button
-                onClick={() => handleDirectionGuess('front')}
-                disabled={!isPlaying}
-                className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50 col-span-2"
+                onClick={playSound}
+                className="flex-1 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4 font-semibold text-slate-950 transition hover:scale-[0.99]"
               >
-                ↑ FRONT
+                🔊 Play Sound
               </button>
+            ) : (
               <button
-                onClick={() => handleDirectionGuess('left')}
-                disabled={!isPlaying}
-                className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50"
+                onClick={pauseSound}
+                className="flex-1 rounded-2xl bg-gradient-to-r from-orange-400 to-red-500 px-6 py-4 font-semibold text-white transition hover:scale-[0.99]"
               >
-                ← LEFT
+                ⏸️ Pause Sound
               </button>
-              <button
-                onClick={() => handleDirectionGuess('right')}
-                disabled={!isPlaying}
-                className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50"
-              >
-                RIGHT →
-              </button>
-              <button
-                onClick={() => handleDirectionGuess('back')}
-                disabled={!isPlaying}
-                className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50 col-span-2"
-              >
-                ↓ BACK
-              </button>
-            </div>
-          )}
+            )}
+          </div>
+
+          {/* Direction Buttons - Always visible but disabled when not playing */}
+          <div className="grid gap-3 grid-cols-2">
+            <button
+              onClick={() => handleDirectionGuess('front')}
+              disabled={!isPlaying}
+              className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50 col-span-2"
+            >
+              ↑ FRONT
+            </button>
+            <button
+              onClick={() => handleDirectionGuess('left')}
+              disabled={!isPlaying}
+              className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50"
+            >
+              ← LEFT
+            </button>
+            <button
+              onClick={() => handleDirectionGuess('right')}
+              disabled={!isPlaying}
+              className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50"
+            >
+              RIGHT →
+            </button>
+            <button
+              onClick={() => handleDirectionGuess('back')}
+              disabled={!isPlaying}
+              className="rounded-2xl bg-slate-800 px-4 py-6 font-bold text-white transition hover:bg-slate-700 disabled:opacity-50 col-span-2"
+            >
+              ↓ BACK
+            </button>
+          </div>
         </div>
 
         {/* Progress Bar */}

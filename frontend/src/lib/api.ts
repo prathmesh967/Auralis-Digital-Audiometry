@@ -93,6 +93,42 @@ export async function googleLogin(idToken: string) {
   return data;
 }
 
+// ================= PASSWORD RESET =================
+
+export async function forgotPassword(email: string) {
+  return apiFetch<{ message: string }>('/api/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export async function verifyOTP(email: string, otp: string) {
+  return apiFetch<{ message: string }>('/api/auth/verify-otp', {
+    method: 'POST',
+    body: JSON.stringify({ email, otp }),
+  });
+}
+
+export async function resetPassword(email: string, otp: string, newPassword: string) {
+  return apiFetch<{ message: string }>('/api/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify({ email, otp, newPassword }),
+  });
+}
+
+export async function requestOTP() {
+  return apiFetch<{ message: string }>('/api/auth/request-otp', {
+    method: 'POST',
+  });
+}
+
+export async function changePassword(otp: string, newPassword: string) {
+  return apiFetch<{ message: string }>('/api/auth/change-password', {
+    method: 'POST',
+    body: JSON.stringify({ otp, newPassword }),
+  });
+}
+
 // ================= PROFILE =================
 
 export async function fetchProfile() {
