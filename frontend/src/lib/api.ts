@@ -1,6 +1,8 @@
 import { HearingResult, SpeechResult } from './audiometry';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://auralis-digital-audiometry.onrender.com';
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  'https://auralis-backend-ug3v.onrender.com';
 const TOKEN_KEY = 'sonicArchitectToken';
 const USER_KEY = 'sonicArchitectUser';
 

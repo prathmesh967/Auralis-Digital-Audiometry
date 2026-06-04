@@ -44,7 +44,8 @@ app.get("/", (req, res) => {
 });
 
 // Google Auth
-const googleClient = new OAuth2Client(googleClientId);
+const googleClient = new
+ OAuth2Client(googleClientId);
 
 // ================== SCHEMAS ==================
 
