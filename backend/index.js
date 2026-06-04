@@ -34,12 +34,7 @@ app.use(express.json());
 
 // MongoDB
 mongoose.set('strictQuery', false);
-mongoose.connect(mongoUri, {
-  tls: true,
-  tlsAllowInvalidCertificates: true,
-  retryWrites: true,
-  maxPoolSize: 10,
-})
+mongoose.connect(mongoUri)
   .then(() => console.log("MongoDB Connected ✅"))
   .catch((err) => console.error("MongoDB Error ❌", err));
 

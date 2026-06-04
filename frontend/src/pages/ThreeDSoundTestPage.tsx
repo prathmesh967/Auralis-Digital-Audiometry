@@ -23,7 +23,7 @@ export default function ThreeDSoundTestPage() {
     };
   }, []);
 
-  // ✅ PLAY (FIXED)
+  //  PLAY (FIXED)
   const handlePlay = async () => {
     if (!audioSupported) {
       setStatus('AudioContext is not supported.');
@@ -42,7 +42,7 @@ export default function ThreeDSoundTestPage() {
       await context.resume();
     }
 
-    // 🔥 Always create NEW nodes
+    //  Always create NEW nodes
     const source = context.createOscillator();
     const panner = context.createPanner();
 
@@ -81,7 +81,7 @@ export default function ThreeDSoundTestPage() {
     setStatus('Playing spatial tone. Move sliders to locate sound.');
   };
 
-  // ✅ STOP (FIXED)
+  //  STOP (FIXED)
   const handleStop = () => {
     if (sourceRef.current) {
       try {
@@ -99,7 +99,7 @@ export default function ThreeDSoundTestPage() {
     setStatus('Playback stopped.');
   };
 
-  // ✅ UPDATE POSITION (LIVE)
+  //  UPDATE POSITION (LIVE)
   const updatePosition = (axis: 'x' | 'y' | 'z', value: number) => {
     if (axis === 'x') setPositionX(value);
     if (axis === 'y') setPositionY(value);

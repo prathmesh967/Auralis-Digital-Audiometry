@@ -76,15 +76,15 @@ export default function LoginPage() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="block text-[10px] uppercase tracking-[0.3em] text-secondary">Security Key</label>
-              {!isRegister && (
-                <button
-                  onClick={() => setShowForgotPassword(true)}
-                  className="text-[10px] text-tertiary transition hover:text-primary"
-                  type="button"
-                >
-                  Forgot?
-                </button>
-              )}
+              {/* {!isRegister && (
+                // <button
+                //   onClick={() => setShowForgotPassword(true)}
+                //   className="text-[10px] text-tertiary transition hover:text-primary"
+                //   type="button"
+                // >
+                //   Forgot?
+                // </button>
+              )} */}
             </div>
             <input
               type="password"
