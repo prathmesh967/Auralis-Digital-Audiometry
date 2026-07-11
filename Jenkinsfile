@@ -23,6 +23,21 @@ pipeline {
             }
         }
 
+stage('Create Environment File') {
+    steps {
+        withCredentials([
+            string(credentialsId: 'MONGODB_URI', variable: 'MONGO_URI'),
+            string(credentialsId: 'JWT_SECRET', variable: 'JWT')
+        ]) {
+
+            writeFile file: 'backend/.env', text: """
+MONGODB_URI=${MONGO_URI}
+JWT_SECRET=${JWT}
+PORT=4000
+"""
+        }
+    }
+}
         stage('Build Docker Images') {
             steps {
                 bat 'docker compose build'
