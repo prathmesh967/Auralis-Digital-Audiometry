@@ -1,12 +1,4 @@
 services:
-  mongodb:
-    image: mongo:7
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-
   backend:
     build:
       context: ./backend
@@ -15,8 +7,6 @@ services:
       - "4000:4000"
     env_file:
       - ./backend/.env.example
-    depends_on:
-      - mongodb
 
   frontend:
     build:
@@ -26,6 +16,3 @@ services:
       - "5173:5173"
     depends_on:
       - backend
-
-volumes:
-  mongodb_data:
