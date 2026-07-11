@@ -10,7 +10,7 @@ pipeline {
         stage('Install Frontend') {
             steps {
                 dir('frontend') {
-                    bat 'npm ci'
+                    bat 'npm install'
                 }
             }
         }
@@ -18,28 +18,26 @@ pipeline {
         stage('Install Backend') {
             steps {
                 dir('backend') {
-                    bat 'npm ci'
+                    bat 'npm install'
                 }
             }
         }
 
-        stage('Create Environment File') {
-            steps {
-                bat 'if exist backend\\.env del backend\\.env'
+stage('Create Environment File') {
+    steps {
+        withCredentials([
+            string(credentialsId: 'MONGODB_URI', variable: 'MONGO_URI'),
+            string(credentialsId: 'JWT_SECRET', variable: 'JWT')
+        ]) {
 
-                withCredentials([
-                    string(credentialsId: 'MONGODB_URI', variable: 'MONGO_URI'),
-                    string(credentialsId: 'JWT_SECRET', variable: 'JWT')
-                ]) {
-                    writeFile file: 'backend/.env', text: """
+            writeFile file: 'backend/.env', text: """
 MONGODB_URI=${MONGO_URI}
 JWT_SECRET=${JWT}
 PORT=4000
 """
-                }
-            }
         }
-
+    }
+}
         stage('Build Docker Images') {
             steps {
                 bat 'docker compose build'
@@ -52,7 +50,8 @@ PORT=4000
                 bat 'docker compose up -d'
             }
         }
-    }
+
+    }   // <-- THIS WAS MISSING
 
     post {
         success {
