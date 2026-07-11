@@ -7,12 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/prathmesh967/Digital-Audio.git'
-            }
-        }
-
         stage('Install Frontend') {
             steps {
                 dir('frontend') {
