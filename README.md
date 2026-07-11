@@ -21,7 +21,12 @@ Then open the local frontend URL shown by Vite.
 
 ## Available Scripts
 
+From the repository root:
 
+- `npm run dev` — Start the frontend development server.
+- `npm run build` — Build the frontend production bundle.
+- `npm run preview` — Preview the built frontend.
+- `npm run start` — Start the backend server.
 
 ### Frontend
 
