@@ -144,6 +144,12 @@ npm start
 
 
 ---
+<img width="1917" height="1077" alt="Screenshot 2026-07-14 124440" src="https://github.com/user-attachments/assets/7c0d96e9-476a-4175-bd15-e92c9e64252b" />
+<img width="1917" height="1075" alt="Screenshot 2026-07-14 124512" src="https://github.com/user-attachments/assets/635d3977-b562-48ea-a860-de803d1137cd" />
+<img width="1905" height="1077" alt="Screenshot 2026-07-14 124647" src="https://github.com/user-attachments/assets/a5f6b829-34df-47ab-ae1b-a95dfa06d07a" />
+<img width="1897" height="1078" alt="Screenshot 2026-07-14 124659" src="https://github.com/user-attachments/assets/f19c01c8-adbc-43c6-94e1-efea6614885e" />
+<img width="1880" height="1007" alt="Screenshot 2026-07-14 124625" src="https://github.com/user-attachments/assets/25d8e8b1-dfd2-48e5-b770-f1662132e052" />
+
 
 
 This project is intended **only for preliminary hearing screening** and educational purposes. It is **not a substitute for professional medical diagnosis or certified audiometric evaluation**.
