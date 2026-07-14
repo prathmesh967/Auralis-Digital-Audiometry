@@ -1,85 +1,149 @@
-# Auralis - Digital Audiometry
+# 🎧 Digital Audiometry – Web-Based Hearing Assessment Platform
 
-Auralis is a modern digital audiometry application built as a monorepo with a React + Vite frontend and an Express backend. The project includes an interactive hearing test experience, speech test, 3D sound localization, profile management, and legacy UI reference pages.
+A web-based hearing assessment platform that enables users to perform **preliminary hearing screening** using a web browser and headphones. The application combines **Adaptive Pure Tone Audiometry**, **Speech Hearing Tests**, **3D Sound Localization**, and **Audiogram Generation** to provide a comprehensive hearing evaluation without requiring traditional audiometry equipment for initial screening.
 
-## Repository Structure
 
-- `frontend/` — React + Vite application with TypeScript, Tailwind CSS, PWA support, and audio/biofeedback modules.
-- `backend/` — Express API server for authentication, user profiles, and audio test data management.
-- `legacy_ui/` — Archived original HTML/legacy screens for reference and comparison.
+---
 
-## Quick Start
+## 📌 Features
 
-From the repository root:
+### 🎵 Adaptive Pure Tone Audiometry
+- Implements the **Hughson–Westlake Algorithm (Down 10 dB, Up 5 dB)**
+- Tests hearing thresholds across multiple frequencies
+- Determines minimum audible hearing threshold efficiently
+
+### 🗣️ Speech Hearing Test
+- Plays predefined words/sentences
+- Captures user responses using browser speech recognition
+- Evaluates speech recognition accuracy
+
+### 🎧 3D Sound Localization
+- Uses the **Web Audio API** with **HRTF (Head Related Transfer Function)**
+- Simulates spatial audio from different directions
+- Tests the user's ability to identify sound direction
+
+### 🔇 Ambient Noise Detection
+- Uses the device microphone
+- Detects environmental noise before testing
+- Ensures accurate hearing assessment by recommending a quiet environment
+
+### 📊 Audiogram Generation
+- Generates hearing threshold graphs
+- Compares left and right ear hearing levels
+- Classifies hearing ability
+
+### 📄 Report Generation
+- Hearing thresholds
+- Hearing age estimation
+- Risk level classification
+- Personalized hearing recommendations
+
+---
+
+# 🏗️ Tech Stack
+
+## Frontend
+- React (Vite)
+- TypeScript
+- Tailwind CSS
+- Chart.js
+- Three.js
+
+## Backend
+- Node.js
+- Express.js
+
+## Database
+- MongoDB Atlas
+
+## Browser APIs
+- Web Audio API
+- Web Speech API
+- MediaDevices API
+
+---
+
+# 🏛️ System Architecture
+
+```
+User
+   │
+   ▼
+React Frontend (Vite + TypeScript)
+   │
+REST APIs
+   │
+Express.js
+   │
+Node.js
+   │
+MongoDB
+```
+
+---
+
+
+---
+
+
+# 📁 Project Structure
+
+```
+digital-audiometry/
+│
+├── client/
+│   ├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   └── assets/
+│
+├── server/
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   ├── middleware/
+│   └── config/
+│
+└── README.md
+```
+
+---
+
+# 🔧 Installation
+
+## Clone Repository
 
 ```bash
+git clone https://github.com/yourusername/digital-audiometry.git
+```
+
+---
+
+## Install Frontend
+
+```bash
+cd client
 npm install
 npm run dev
 ```
 
-Then open the local frontend URL shown by Vite.
+---
 
-## Available Scripts
+## Install Backend
 
-From the repository root:
-
-- `npm run dev` — Start the frontend development server.
-- `npm run build` — Build the frontend production bundle.
-- `npm run preview` — Preview the built frontend.
-- `npm run start` — Start the backend server.
-
-### Frontend
-
-Inside `frontend/`:
-
-- `npm run dev` — Start Vite development server.
-- `npm run build` — Compile TypeScript and build production assets.
-- `npm run preview` — Serve the production build locally.
-
-### Backend
-
-Inside `backend/`:
-
-- `npm run start` — Start the Express server with `node index.js`.
-
-## Frontend Features
-
-- React + Vite + TypeScript front-end application.
-- Responsive hearing test dashboard.
-- Sound localization and speech audio testing.
-- User profile management and settings.
-- PWA-ready configuration with `vite-plugin-pwa`.
-- 3D audio support using the Web Audio API and `three`.
-
-## Backend Features
-
-- Express API server with CORS and environment configuration.
-- Authentication support with JWT.
-- User data persistence using MongoDB / Mongoose.
-- Email support via Nodemailer.
-- Google login support via `google-auth-library`.
-
-## Environment Configuration
-
-Create a `.env` file in `backend/` based on `backend/.env.example` and set the required values.
-
-Example:
-
-```env
-MONGODB_URI=mongodb://127.0.0.1:27017/auralis
-JWT_SECRET=your-secret-key
-PORT=4000
+```bash
+cd server
+npm install
+npm start
 ```
 
+---
 
 
-## Notes
 
-- The frontend uses `google-auth-library` in the browser and backend.
-- The backend depends on `bcryptjs`, `jsonwebtoken`, and `mongoose`.
-- The frontend depends on `chart.js`, `framer-motion`, `howler`, `jspdf`, and `three`.
 
-## Contact
+---
 
-For questions or contributions, open an issue or submit a pull request.
 
+This project is intended **only for preliminary hearing screening** and educational purposes. It is **not a substitute for professional medical diagnosis or certified audiometric evaluation**.
